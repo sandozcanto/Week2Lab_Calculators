@@ -42,8 +42,41 @@ public class ArithmeticCalculatorServlet extends HttpServlet {
 //            out.println("</html>");
 //        }
 
+        String first = request.getParameter("first");
+        String second = request.getParameter("second");
+        String calculation = "";
+        String add = request.getParameter("add");
+        String sub = request.getParameter("sub");
+        String divide = request.getParameter("divide");
+        String multi = request.getParameter("multi");
 
-    getServletContext().getRequestDispatcher("/arithmeticcalculator.jsp").forward(request, response);  
+        if (first != null && second != null && first != "" && second != "") {
+
+            if (add != null) {
+                calculation = "" + (Integer.parseInt(first) + Integer.parseInt(second));
+                request.setAttribute("firstValue", first);
+                request.setAttribute("secondValue", second);
+                
+            } else if (sub != null) {
+                calculation = "" + (Integer.parseInt(first) - Integer.parseInt(second));
+                request.setAttribute("firstValue", first);
+                request.setAttribute("secondValue", second);
+            } else if (multi != null) {
+                calculation = "" + (Integer.parseInt(first) * Integer.parseInt(second));
+                request.setAttribute("firstValue", first);
+                request.setAttribute("secondValue", second);
+            } else {
+                calculation = "" + (Integer.parseInt(first) / Integer.parseInt(second));
+                request.setAttribute("firstValue", first);
+                request.setAttribute("secondValue", second);
+            }
+            request.setAttribute("calculation", calculation);
+
+        } else if (first == null && second == null){
+            calculation = "----" ;
+            request.setAttribute("calculation", calculation);
+        }
+        getServletContext().getRequestDispatcher("/arithmeticcalculator.jsp").forward(request, response);
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
