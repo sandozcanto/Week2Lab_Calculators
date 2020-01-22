@@ -13,13 +13,13 @@
     </head>
     <body>
         <div>
-        <form>
-        <h1>Age Calculator</h1>
-            <b>Enter your age: </b><input type="text" name="age"/><br/>
-            <input type="submit" value="Age next birthday"/><br>
-            <div>${message}</div><br>
-            <a href="arithmetic"><b>Arithmetic Calculator </b></a>
-        </form>
+            <form>
+                <h1>Age Calculator</h1>
+                <b>Enter your age: </b><input type="text" name="age"/><br/>
+                <input type="submit" value="Age next birthday"/><br>
+                <div>${message}</div><br>
+                <a href="arithmetic"><b>Arithmetic Calculator </b></a>
+            </form>
         </div>
     </body>
 </html>

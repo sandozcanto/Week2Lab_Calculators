@@ -51,29 +51,35 @@ public class ArithmeticCalculatorServlet extends HttpServlet {
         String multi = request.getParameter("multi");
 
         if (first != null && second != null && first != "" && second != "") {
+            try {
 
-            if (add != null) {
-                calculation = "" + (Integer.parseInt(first) + Integer.parseInt(second));
-                request.setAttribute("firstValue", first);
-                request.setAttribute("secondValue", second);
-                
-            } else if (sub != null) {
-                calculation = "" + (Integer.parseInt(first) - Integer.parseInt(second));
-                request.setAttribute("firstValue", first);
-                request.setAttribute("secondValue", second);
-            } else if (multi != null) {
-                calculation = "" + (Integer.parseInt(first) * Integer.parseInt(second));
-                request.setAttribute("firstValue", first);
-                request.setAttribute("secondValue", second);
-            } else {
-                calculation = "" + (Integer.parseInt(first) / Integer.parseInt(second));
-                request.setAttribute("firstValue", first);
-                request.setAttribute("secondValue", second);
+                if (add != null) {
+                    calculation = "" + (Integer.parseInt(first) + Integer.parseInt(second));
+                    request.setAttribute("firstValue", first);
+                    request.setAttribute("secondValue", second);
+
+                } else if (sub != null) {
+                    calculation = "" + (Integer.parseInt(first) - Integer.parseInt(second));
+                    request.setAttribute("firstValue", first);
+                    request.setAttribute("secondValue", second);
+                } else if (multi != null) {
+                    calculation = "" + (Integer.parseInt(first) * Integer.parseInt(second));
+                    request.setAttribute("firstValue", first);
+                    request.setAttribute("secondValue", second);
+                } else {
+                    calculation = "" + (Integer.parseInt(first) / Integer.parseInt(second));
+                    request.setAttribute("firstValue", first);
+                    request.setAttribute("secondValue", second);
+                }
+                request.setAttribute("calculation", calculation);
+
+            } catch (Exception e) {
+                calculation = "Invalid";
+                request.setAttribute("calculation", calculation);
             }
-            request.setAttribute("calculation", calculation);
 
-        } else if (first == null && second == null){
-            calculation = "----" ;
+        } else if (first == null && second == null) {
+            calculation = "----";
             request.setAttribute("calculation", calculation);
         }
         getServletContext().getRequestDispatcher("/arithmeticcalculator.jsp").forward(request, response);

@@ -29,28 +29,29 @@ public class AgeCalculatorServlet extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-      
-        String message="";
-        
+
+        String message = "";
+
         String age = request.getParameter("age");
-        
-        if (age==null){
-            
-            message ="";
+        try {
+
+            if (age == null) {
+
+                message = "";
+            } else if (age.equals("")) {
+
+                message = "You must give your current age";
+            } else {
+
+                message = "Your age next birthday will be " + (Integer.parseInt(age) + 1);
+            }
+        } catch (Exception e) {
+            message = "Invalid";
         }
-       
-        else if (age.equals("")){
-            
-            message ="You must give your current age";
-        } 
-        
-        else {
-            
-            message ="Your age next birthday will be " + (Integer.parseInt(age) + 1);
-        }
-    request.setAttribute("message", message);
-    getServletContext().getRequestDispatcher("/agecalculator.jsp").forward(request, response);
+        request.setAttribute("message", message);
+        getServletContext().getRequestDispatcher("/agecalculator.jsp").forward(request, response);
     }
+
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**
      * Handles the HTTP <code>GET</code> method.
