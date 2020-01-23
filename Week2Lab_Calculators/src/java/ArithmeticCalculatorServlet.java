@@ -50,34 +50,40 @@ public class ArithmeticCalculatorServlet extends HttpServlet {
         String divide = request.getParameter("divide");
         String multi = request.getParameter("multi");
 
-        if (first != null && second != null && first != "" && second != "") {
-            try {
+        if (first != null && second != null) {
 
-                if (add != null) {
-                    calculation = "" + (Integer.parseInt(first) + Integer.parseInt(second));
-                    request.setAttribute("firstValue", first);
-                    request.setAttribute("secondValue", second);
+            if (first != "" || second != "") {
 
-                } else if (sub != null) {
-                    calculation = "" + (Integer.parseInt(first) - Integer.parseInt(second));
-                    request.setAttribute("firstValue", first);
-                    request.setAttribute("secondValue", second);
-                } else if (multi != null) {
-                    calculation = "" + (Integer.parseInt(first) * Integer.parseInt(second));
-                    request.setAttribute("firstValue", first);
-                    request.setAttribute("secondValue", second);
-                } else {
-                    calculation = "" + (Integer.parseInt(first) / Integer.parseInt(second));
-                    request.setAttribute("firstValue", first);
-                    request.setAttribute("secondValue", second);
+                try {
+
+                    int firstVal = Integer.parseInt(first);
+                    int secondVal = Integer.parseInt(second);
+
+                    if (add != null) {
+                        calculation = "" + (firstVal + secondVal);
+                        request.setAttribute("firstValue", first);
+                        request.setAttribute("secondValue", second);
+
+                    } else if (sub != null) {
+                        calculation = "" + (firstVal - secondVal);
+                        request.setAttribute("firstValue", first);
+                        request.setAttribute("secondValue", second);
+                    } else if (multi != null) {
+                        calculation = "" + (firstVal * secondVal);
+                        request.setAttribute("firstValue", first);
+                        request.setAttribute("secondValue", second);
+                    } else {
+                        calculation = "" + (firstVal / secondVal);
+                        request.setAttribute("firstValue", first);
+                        request.setAttribute("secondValue", second);
+                    }
+                    request.setAttribute("calculation", calculation);
+
+                } catch (Exception e) {
+                    calculation = "Invalid";
+                    request.setAttribute("calculation", calculation);
                 }
-                request.setAttribute("calculation", calculation);
-
-            } catch (Exception e) {
-                calculation = "Invalid";
-                request.setAttribute("calculation", calculation);
             }
-
         } else if (first == null && second == null) {
             calculation = "----";
             request.setAttribute("calculation", calculation);
